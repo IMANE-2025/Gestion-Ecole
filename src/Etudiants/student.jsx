@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../css/style.css'
-import teacher from '../teacher'
+import teacher from '../LoginEnseignant'
 
 function student() {
   return (

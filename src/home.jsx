@@ -1,6 +1,6 @@
 import React from 'react'
 import student from './Etudiants/student'
-import teacher from './teacher'
+import LoginEnseignant from './LoginEnseignant'
 
 function home() {
   return (
@@ -55,7 +55,7 @@ function home() {
           <a href="Etudiants/student" className="nav-item nav-link">
             STUDENT
           </a>
-          <a href="teacher" className="nav-item nav-link">
+          <a href="LoginEnseignant" className="nav-item nav-link">
             TEACHER
           </a>
           

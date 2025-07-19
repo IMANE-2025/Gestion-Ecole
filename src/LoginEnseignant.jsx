@@ -1,7 +1,44 @@
 import React from 'react'
 import './style.css'
+ import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // pour la redirection
+import axios from "axios";
 
-function teacher() {
+function LoginEnseignant() {
+
+const [email, setEmail] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3001/LoginEnseignant", {
+        email,
+        motDePasse,
+      });
+
+      const enseignant = response.data;
+
+      console.log("Enseignant reçu :", response.data);
+      console.log("enseignant reçu après login :", enseignant);
+
+      // Si succès : redirection avec données
+      //const enseignant = response.data;
+      navigate("/detailsEnseignant", { state: { id: enseignant.idEnseignant } });
+    } catch (error) {
+      alert("Email ou mot de passe incorrect");
+      console.error(error);
+    }
+};
+
+
+
+
+
+
+
   return (
     <>
     <link href="img/favicon.ico" rel="icon" />
@@ -79,20 +116,44 @@ function teacher() {
       <div className="col-lg-6 text-center text-lg-left">
 
       
-  <form className="form">
-  <p className="form-title" >Sign in to your account</p>
-  <div className="input-container">
-    <input type="email" placeholder="Enter email" />
-    <span></span>
-  </div><br />
-  <div className="input-container">
-    <input type="password" placeholder="Enter password" />
-  </div><br />
-  <button type="submit" className="submit">
-    Sign in
-  </button><br /><br />
+ 
+
+
+
+
+
+
+
   
-</form>
+
+ 
+    <form className="form" onSubmit={handleSubmit}>
+      <p className="form-title"> Sign in to your account</p>
+
+      <div className="input-container">
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div><br />
+
+      <div className="input-container">
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={motDePasse}
+          onChange={(e) => setMotDePasse(e.target.value)}
+        />
+      </div><br />
+
+      <button type="submit" className="submit">Sign in</button><br /><br />
+    </form>
+  
+
+
+
 
 
 
@@ -108,4 +169,4 @@ function teacher() {
   )
 }
 
-export default teacher
+export default LoginEnseignant
